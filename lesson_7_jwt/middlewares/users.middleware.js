@@ -3,18 +3,17 @@ const User = require('../db/Users');
 const ErrorHandler = require('../errors/error.handler');
 
 module.exports = {
-  validateUserBody: (req, res, next) => {
+  getUserByDynamicParams: (paramName, searchIn = 'body', dbField = paramName) => async (req, res, next) => {
     try {
-      const { error } = validateUserBody.validate(req.body);
-      if (error) {
-        throw new ErrorHandler(404, error.details[0].message);
-      }
+      const value = req[searchIn][paramName];
+      const user = await User.findOne({ [dbField]: value });
+      req.user = user;
       next();
     } catch (e) {
       next(e);
     }
   },
-  checkUniqueEmail: async (req, res, next) => {
+  ifUserPresent: async (req, res, next) => {
     try {
       const { email } = req.body;
       const emailExist = await User.findOne({ email });
@@ -26,14 +25,23 @@ module.exports = {
       next(e);
     }
   },
-  getUserByDynamicParams: (paramName, searchIn, dbField = paramName) => async (req, res, next) => {
+  ifUserNotPresent: (req, res, next) => {
     try {
-      const value = req[searchIn][paramName];
-      const user = await User.findOne({ [dbField]: value }).lean();
+      const { user } = req;
       if (!user) {
-        throw new ErrorHandler(404, 'User not found (Dynamic params)');
+        throw new ErrorHandler(404, 'User not found');
       }
-      req.user = user;
+      next();
+    } catch (e) {
+      next(e);
+    }
+  },
+  validateUserBody: (req, res, next) => {
+    try {
+      const { error } = validateUserBody.validate(req.body);
+      if (error) {
+        throw new ErrorHandler(404, error.details[0].message);
+      }
       next();
     } catch (e) {
       next(e);
@@ -52,5 +60,5 @@ module.exports = {
     } catch (e) {
       next(e);
     }
-  },
+  }
 };

@@ -1,6 +1,7 @@
 module.exports = {
   userNormalizator: (user) => {
-    const wordToDelete = ['password', '__v', 'createdAt', 'updatedAt'];
+    const wordToDelete = ['password'];
+    user = user.toJSON();
     wordToDelete.forEach(word => {
       delete user[word];
     });

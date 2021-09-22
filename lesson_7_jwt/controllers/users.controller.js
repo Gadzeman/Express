@@ -1,14 +1,14 @@
 const { userNormalizator } = require('../utils/users.normalizator');
 const User = require('../db/Users');
-const { hash } = require('../services/users.service');
+const { hash } = require('../services/bcrypt.service');
 
 module.exports = {
   getUser: (req, res, next) => {
     try {
       const { user } = req;
-      const normalizedUser = userNormalizator(user);
-      console.log(normalizedUser);
-      res.json(normalizedUser);
+      res.json({
+        user: userNormalizator(user)
+      });
     } catch (e) {
       next(e);
     }
