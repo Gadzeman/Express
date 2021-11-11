@@ -3,3 +3,5 @@
 /node_modules/
 /package-lock.json
 /lesson_6_pm2_middleware/.env
+/lesson_7_jwt/.env
+/lesson_8_nodemailer/.env

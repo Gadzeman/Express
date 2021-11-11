@@ -1,4 +1,5 @@
 module.exports = {
-  usersService: require('./users.service'),
-  authService: require('./auth.service')
+  authService: require('./auth.service'),
+  emailService: require('./email.service'),
+  passwordService: require('./password.service')
 };

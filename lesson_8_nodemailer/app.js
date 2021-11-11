@@ -1,13 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
+require('dotenv').config();
+
 const { PORT, DB_CONNECT_URL } = require('./config/variables');
 const { usersRouter, authRouter } = require('./routers');
 
 mongoose.connect(DB_CONNECT_URL);
 const app = express();
-
-require('dotenv').config();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

@@ -1,6 +1,6 @@
 const OAuth = require('../db/OAuth');
 const { AUTHORIZATION } = require('../config/variables');
-const { compare } = require('../services/users.service');
+const { compare } = require('../services/password.service');
 const { generateTokenPair } = require('../services/auth.service');
 const { userNormalizator } = require('../utils/users.normalizator');
 
