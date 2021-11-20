@@ -2,6 +2,6 @@
 /node.js.2.iml
 /node_modules/
 /package-lock.json
-/lesson_6_pm2_middleware/.env
-/lesson_7_jwt/.env
+/pm2_middleware/.env
+/jwt/.env
 /lesson_8_nodemailer/.env
