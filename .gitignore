@@ -1,7 +1,5 @@
-/.idea/
-/node.js.2.iml
-/node_modules/
-/package-lock.json
-/pm2_middleware/.env
-/jwt/.env
-/lesson_8_nodemailer/.env
+.idea
+node.js.2.iml
+node_modules
+package-lock.json
+bcrypt_jwt_nodemailer/.env
